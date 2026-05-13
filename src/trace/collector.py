@@ -100,7 +100,7 @@ class TraceCollector:
         return self._trace
 
     def _is_stdlib(self, filename: str) -> bool:
-        return filename.startswith(self._stdlib_prefixes) or filename.startswith("<")
+        return filename.startswith(self._stdlib_prefixes)
 
     # ------------------------------------------------------------------
     # Public API

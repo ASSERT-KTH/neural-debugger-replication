@@ -62,7 +62,7 @@ def train(cfg: TrainConfig) -> None:
     model = AutoModelForCausalLM.from_pretrained(
         cfg.model_name,
         trust_remote_code=True,
-        torch_dtype=torch.bfloat16 if cfg.bf16 else (torch.float16 if cfg.fp16 else torch.float32),
+        dtype=torch.bfloat16 if cfg.bf16 else (torch.float16 if cfg.fp16 else torch.float32),
     )
 
     # Resize embeddings for added special tokens
@@ -123,7 +123,7 @@ def train(cfg: TrainConfig) -> None:
         args=training_args,
         train_dataset=tokenized,
         data_collator=collator,
-        tokenizer=tokenizer,
+        processing_class=tokenizer,
     )
 
     trainer.train()

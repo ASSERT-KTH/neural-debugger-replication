@@ -129,7 +129,7 @@ def _load_programs(source: str, split: str) -> Iterator[dict]:
 def _load_mbpp(split: str) -> Iterator[dict]:
     import datasets as hf_datasets
 
-    ds = hf_datasets.load_dataset("google-research-datasets/mbpp", split=split, trust_remote_code=True)
+    ds = hf_datasets.load_dataset("google-research-datasets/mbpp", split=split)
     for row in ds:
         code = row.get("code", "")
         if not code.strip():
