@@ -59,11 +59,11 @@ def evaluate(
 
     tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
     model = AutoModelForCausalLM.from_pretrained(
-        model_path, trust_remote_code=True, torch_dtype=torch.float32
+        model_path, trust_remote_code=True, dtype=torch.float32
     ).to(device)
     model.eval()
 
-    ds = hf_datasets.load_dataset("cruxeval-org/cruxeval", split="test", trust_remote_code=True)
+    ds = hf_datasets.load_dataset("cruxeval-org/cruxeval", split="test")
     if limit is not None:
         ds = ds.select(range(min(limit, len(ds))))
 

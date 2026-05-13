@@ -6,14 +6,15 @@ Examples
 --------
 # Quick test with 10 problems
 python scripts/eval_cruxeval.py \\
-  --model /tmp/smoke_model \\
+  --model checkpoints/smoke_model \\
   --limit 10 \\
   --verbose
 
-# Full evaluation
+# Full evaluation with saved results
 python scripts/eval_cruxeval.py \\
   --model checkpoints/nd-1.3b \\
-  --device cuda
+  --device cuda \\
+  --output results/eval.json
 """
 
 import argparse
@@ -33,6 +34,7 @@ def main():
     p.add_argument("--max-new-tokens", type=int, default=256)
     p.add_argument("--device", default="cpu")
     p.add_argument("--verbose", action="store_true")
+    p.add_argument("--output", default=None, help="Save JSON results to this path")
     args = p.parse_args()
 
     results = evaluate(
@@ -47,6 +49,12 @@ def main():
     print(f"\nOutput prediction pass@1: {results['output_pass_at_1']:.1%}")
     print(f"Input  prediction pass@1: {results['input_pass_at_1']:.1%}")
     print(f"Total problems evaluated: {results['n']}")
+
+    if args.output:
+        out_path = Path(args.output)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(json.dumps(results, indent=2) + "\n")
+        print(f"Results saved to {out_path}")
 
 
 if __name__ == "__main__":
