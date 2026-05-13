@@ -13,7 +13,6 @@ from src.eval.cruxeval import (
 )
 from src.trace.serializer import ACTION_SEP, ARG_SEP, FRAME_SEP, SRC_SEP
 
-
 SAMPLE_FUNC = """\
 def add(a, b):
     return a + b
@@ -64,10 +63,10 @@ def test_verify_output_literal_eval():
 
 def test_trajectory_sampler_produces_output():
     """Smoke test: run the full pipeline on a trivial function."""
-    from src.trace.collector import TraceCollector
-    from src.trace.state_tree import build_tree
     from src.data.trajectory_sampler import TrajectoryPolicy
+    from src.trace.collector import TraceCollector
     from src.trace.serializer import serialize_trajectory
+    from src.trace.state_tree import build_tree
 
     def multiply(x, y):
         return x * y

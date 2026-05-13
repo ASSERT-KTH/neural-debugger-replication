@@ -8,10 +8,9 @@ filtering out stdlib frames and taking deep-copied locals snapshots.
 from __future__ import annotations
 
 import copy
-import inspect
 import linecache
 import sys
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any
 
 
@@ -132,7 +131,6 @@ class TraceCollector:
         The source is compiled and exec'd. The *last expression* in the
         source (if it is an expression statement) is returned.
         """
-        import ast
         import textwrap
 
         source = textwrap.dedent(source)

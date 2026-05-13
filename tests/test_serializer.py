@@ -45,7 +45,6 @@ def test_serialize_state_return():
 
 
 def test_serialize_state_delta_encoding():
-    node1 = _make_node(locals_={"x": 1, "y": 2})
     node2 = _make_node(locals_={"x": 1, "y": 3})
     s = serialize_state(node2, prev_locals={"x": 1, "y": 2})
     d = json.loads(s.split(ARG_SEP, 1)[1].split("\n", 1)[1])

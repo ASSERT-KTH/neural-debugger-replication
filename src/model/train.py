@@ -19,9 +19,7 @@ Usage (via scripts/train.py):
 
 from __future__ import annotations
 
-import os
-from dataclasses import dataclass, field
-from typing import Optional
+from dataclasses import dataclass
 
 from src.model.tokenizer import load_tokenizer
 
@@ -54,8 +52,8 @@ def train(cfg: TrainConfig) -> None:
     from transformers import (
         AutoModelForCausalLM,
         DataCollatorForLanguageModeling,
-        TrainingArguments,
         Trainer,
+        TrainingArguments,
     )
 
     # ---------------------------------------------------------------- load --
@@ -72,7 +70,7 @@ def train(cfg: TrainConfig) -> None:
 
     # ---------------------------------------------------------------- LoRA --
     if cfg.use_lora:
-        from peft import LoraConfig, TaskType, get_peft_model, prepare_model_for_kbit_training
+        from peft import LoraConfig, TaskType, get_peft_model
 
         lora_cfg = LoraConfig(
             r=cfg.lora_r,

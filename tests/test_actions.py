@@ -5,8 +5,6 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.trace.collector import RawEvent, TraceCollector
-from src.trace.state_tree import TreeNode, build_tree
 from src.debugger.actions import (
     apply_action,
     continue_run,
@@ -18,6 +16,8 @@ from src.debugger.actions import (
     step_over,
     step_return,
 )
+from src.trace.collector import RawEvent, TraceCollector
+from src.trace.state_tree import build_tree
 
 
 def _evt(evt, lineno=1, depth=0, src=""):

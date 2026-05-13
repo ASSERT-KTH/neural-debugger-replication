@@ -16,22 +16,17 @@ by executing the function in a sandboxed subprocess.
 from __future__ import annotations
 
 import ast
-import contextlib
-import io
 import multiprocessing
 import textwrap
 from typing import Any
 
+from src.eval.metrics import pass_at_1
 from src.trace.serializer import (
     ACTION_SEP,
-    FRAME_SEP,
     ARG_SEP,
+    FRAME_SEP,
     SRC_SEP,
-    deserialize_state,
-    serialize_trajectory,
 )
-from src.eval.metrics import pass_at_1, field_accuracy
-
 
 # ------------------------------------------------------------------ public --
 

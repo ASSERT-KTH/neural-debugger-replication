@@ -6,7 +6,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.trace.collector import RawEvent, TraceCollector
-from src.trace.state_tree import TreeNode, build_tree
+from src.trace.state_tree import build_tree
 
 
 def _evt(evt, lineno=1, depth=0, src=""):
