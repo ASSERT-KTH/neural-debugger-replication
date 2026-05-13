@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "neural-debugger"
+version = "0.1.0"
+description = "Reimplementation of 'Towards a Neural Debugger for Python' (arXiv 2603.09951)"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+# Heavy ML deps — needed for data generation, training, and evaluation
+ml = [
+    "datasets>=2.21.0",
+    "transformers>=4.44.0",
+    "torch>=2.3.0",
+    "peft>=0.12.0",
+    "accelerate>=0.33.0",
+    "bitsandbytes>=0.43.0",
+]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "black>=24.0.0",
+    "ruff>=0.5.0",
+]
+all = [
+    "neural-debugger[ml,dev]",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
